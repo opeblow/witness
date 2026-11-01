@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "native",
+    "contentHash": "0x2ff0f6988d7f45dc96a26280fa46848d7bb6035a2aa5d2180e1b08cfb080b28a",
+    "blockNumber": 281874,
+    "blockHash": "0x3495f81f95604ebb657080655fa4c7aafde6c84d15029dc6fe8f187352d82c72",
+    "extrinsicHash": "0xaf59e63fa9d904e6f71565d9bfe104772fefade9b6d157e04bafb54e299ff32b",
+    "extrinsicIndex": 1,
+    "envelopeBytes": 4949,
+    "fee": "50600551683780",
+    "sealedAt": "2026-11-01T20:00:13.113Z",
+    "note": "First Witness capture on Portaldot V3 testnet"
+  }
+]
