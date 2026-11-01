@@ -1,0 +1,16 @@
+{
+  "name": "@witness/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WitnessRegistry and integration examples for Portaldot V3 (pallet-revive).",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "clean": "hardhat clean"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.25.0"
+  }
+}
