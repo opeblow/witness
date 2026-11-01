@@ -1,6 +1,6 @@
 # Build from the repository root:
 #   docker build -f services/notary/Dockerfile -t witness-notary .
-FROM node:22-alpine AS build
+FROM node:26-alpine AS build
 WORKDIR /repo
 COPY package.json package-lock.json tsconfig.base.json ./
 COPY packages/core/package.json packages/core/
@@ -13,7 +13,7 @@ COPY services/notary services/notary
 RUN npm run build -w @witness/core -w @witness/sdk -w @witness/notary \
  && npm prune --omit=dev --workspace @witness/core --workspace @witness/sdk --workspace @witness/notary
 
-FROM node:22-alpine
+FROM node:26-alpine
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build /repo/node_modules node_modules
