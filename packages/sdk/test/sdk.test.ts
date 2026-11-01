@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { decodeFunctionData } from 'viem';
 import { type Hex, createCapture, generateKeyPair } from '@witness/core';
+import type { ApiPromise } from '@polkadot/api';
 import {
   CERTIFICATE_FORMAT,
   PORTALDOT_V3_TESTNET,
@@ -8,6 +9,7 @@ import {
   RegistryNotDeployedError,
   WITNESS_REGISTRY_ABI,
   blockUrl,
+  buildCaptureExtrinsic,
   encodeAnchorCall,
   encodeCertificate,
   parseCertificate,
@@ -92,5 +94,37 @@ describe('certificates', () => {
 
   it('rejects other JSON documents', () => {
     expect(() => parseCertificate('{"hello":"world"}')).toThrow('Not a Witness certificate');
+  });
+});
+
+describe('buildCaptureExtrinsic', () => {
+  it('passes the envelope and calldata as hex, not raw bytes', () => {
+    // polkadot.js reads a raw Uint8Array argument as already SCALE-encoded (length-prefixed),
+    // which corrupts the payload. Hex strings are encoded with a fresh length prefix.
+    const calls: Record<string, unknown[]> = {};
+    const record =
+      (name: string) =>
+      (...args: unknown[]) => {
+        calls[name] = args;
+        return { name };
+      };
+    const api = {
+      tx: {
+        transactionStorage: { store: record('store') },
+        revive: { call: record('call') },
+        utility: { batchAll: record('batchAll') },
+      },
+    } as unknown as ApiPromise;
+
+    buildCaptureExtrinsic(api, {
+      envelope: new Uint8Array([1, 2, 255]),
+      registry: H('aa'),
+      anchorCalldata: '0x1ceaa5e5' as Hex,
+    });
+
+    expect(calls['store']).toEqual(['0x0102ff']);
+    expect(calls['call']?.[0]).toBe(H('aa'));
+    expect(calls['call']?.[4]).toBe('0x1ceaa5e5');
+    expect(calls['batchAll']).toEqual([[{ name: 'store' }, { name: 'call' }]]);
   });
 });
