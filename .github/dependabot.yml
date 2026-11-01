@@ -1,10 +1,12 @@
+# Version-update PRs are paused (limit 0) during the Hacker House code freeze.
+# Security updates still open automatically. Raise the limits to resume.
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 0
     groups:
       polkadot:
         patterns: ['@polkadot/*']
@@ -15,8 +17,10 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
 
   - package-ecosystem: docker
     directory: /services/notary
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
