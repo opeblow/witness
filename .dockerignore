@@ -1,0 +1,12 @@
+**/node_modules
+**/dist
+.git
+.secrets
+.env
+.env.*
+apps
+contracts/artifacts
+contracts/cache
+docs
+tools/out
+coverage
