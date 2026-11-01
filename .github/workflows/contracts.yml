@@ -1,0 +1,41 @@
+name: Contracts
+
+on:
+  push:
+    branches: [main]
+    paths: ['contracts/**', '.github/workflows/contracts.yml']
+  pull_request:
+    paths: ['contracts/**', '.github/workflows/contracts.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  hardhat:
+    name: Compile, test and measure coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Compile
+        run: npx hardhat compile
+        working-directory: contracts
+
+      - name: Test
+        run: npx hardhat test
+        working-directory: contracts
+        env:
+          REPORT_GAS: 'true'
+
+      - name: Coverage
+        run: npx hardhat coverage
+        working-directory: contracts
