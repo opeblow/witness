@@ -1,0 +1,44 @@
+{
+  "name": "witness",
+  "private": true,
+  "description": "Capture-time evidence for photos, anchored on Portaldot V3.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/core",
+    "packages/sdk",
+    "services/notary",
+    "contracts",
+    "tools",
+    "apps/web"
+  ],
+  "scripts": {
+    "build": "npm run build -w @witness/core -w @witness/sdk && npm run build -w @witness/notary -w @witness/tools && npm run build -w @witness/web",
+    "build:packages": "npm run build -w @witness/core -w @witness/sdk",
+    "dev": "npm run dev -w @witness/web",
+    "dev:notary": "npm run dev -w @witness/notary",
+    "test": "npm run build:packages && vitest run",
+    "test:contracts": "npm test -w @witness/contracts",
+    "lint": "eslint .",
+    "typecheck": "npm run build:packages && npm run typecheck --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "deploy:registry": "npm run build:packages && npm run deploy:registry -w @witness/tools",
+    "verify:live": "npm run build:packages && npm run verify:live -w @witness/tools"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.0",
+    "@types/node": "^22.15.0",
+    "@vitest/coverage-v8": "^3.2.7",
+    "eslint": "^9.30.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.2.0",
+    "prettier": "^3.6.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.0",
+    "vitest": "^3.2.4"
+  }
+}
