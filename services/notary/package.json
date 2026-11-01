@@ -1,0 +1,28 @@
+{
+  "name": "@witness/notary",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sponsoring relayer that anchors signed Witness captures on Portaldot V3.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/main.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch src/main.ts",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "@polkadot/api": "^16.5.6",
+    "@polkadot/keyring": "^14.0.3",
+    "@polkadot/util-crypto": "^14.0.3",
+    "@witness/core": "0.1.0",
+    "@witness/sdk": "0.1.0",
+    "hono": "^4.8.0",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3"
+  }
+}
