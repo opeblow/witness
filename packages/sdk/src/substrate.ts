@@ -1,7 +1,7 @@
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import type { ProviderInterface } from '@polkadot/rpc-provider/types';
 import type { SubmittableExtrinsic, SubmittableExtrinsicFunction } from '@polkadot/api/types';
-import { type Hex, type SignedCapture, decodeEnvelope, fromHex } from '@witness/core';
+import { type Hex, type SignedCapture, decodeEnvelope, fromHex, toHex } from '@witness/core';
 
 /** Gas and deposit limits for the registry call. Unused weight is refunded by the runtime. */
 export interface AnchorCallLimits {
@@ -58,13 +58,14 @@ export function buildCaptureExtrinsic(
   input: { envelope: Uint8Array; registry: Hex; anchorCalldata: Hex; limits?: AnchorCallLimits },
 ): SubmittableExtrinsic<'promise'> {
   const limits = input.limits ?? DEFAULT_ANCHOR_LIMITS;
-  const store = txOf(api, 'transactionStorage', 'store')(input.envelope);
+  // Hex, not Uint8Array: polkadot.js treats a raw Uint8Array as already SCALE-encoded (length-prefixed).
+  const store = txOf(api, 'transactionStorage', 'store')(toHex(input.envelope));
   const anchor = txOf(api, 'revive', 'call')(
     input.registry,
     0,
     { refTime: limits.refTime, proofSize: limits.proofSize },
     limits.storageDepositLimit,
-    fromHex(input.anchorCalldata),
+    input.anchorCalldata,
   );
   return txOf(api, 'utility', 'batchAll')([store, anchor]);
 }
