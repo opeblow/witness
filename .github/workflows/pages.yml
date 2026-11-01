@@ -36,7 +36,7 @@ jobs:
           VITE_NOTARY_URL: ${{ vars.VITE_NOTARY_URL }}
           VITE_REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
       - uses: actions/upload-pages-artifact@v3
         with:
