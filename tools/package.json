@@ -11,7 +11,8 @@
     "keys": "tsx src/keys.ts",
     "deploy:registry": "tsx src/deploy-registry.ts",
     "verify:live": "tsx src/verify-live.ts",
-    "smoke": "tsx src/smoke.ts"
+    "smoke": "tsx src/smoke.ts",
+    "seal:native": "tsx src/seal-native.ts"
   },
   "dependencies": {
     "@polkadot/api": "^16.5.6",
