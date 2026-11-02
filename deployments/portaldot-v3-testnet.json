@@ -1,0 +1,8 @@
+{
+  "network": "portaldot-v3-testnet",
+  "registry": "0x47d33e33e4c7932535001d4a01e4933bc4bcf0e0",
+  "deploymentBlock": 296036,
+  "deploymentExtrinsic": "0xd39550287ca85f774b93d5d48f117c4a60c8540db95fc310345a4012d296fced",
+  "deployer": "5EfBp5ihb1CdbjXomg3WmiEixEG5UpVM6jgUZLYq92bJvbue",
+  "deployedAt": "2026-11-02T19:45:11.714Z"
+}
