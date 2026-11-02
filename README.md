@@ -11,7 +11,16 @@
 [![Tests](https://img.shields.io/badge/tests-69%20TS%20%2B%2013%20Solidity-1D6B4A)](#testing)
 [![Node](https://img.shields.io/badge/node-%3E%3D22-15130F)](.nvmrc)
 
+**[Live app](https://opeblow.github.io/witness/)** · **[Demo video](https://youtu.be/EzAxYOQmFIk)** · **[Ledger](https://opeblow.github.io/witness/ledger)** · **[Developers](https://opeblow.github.io/witness/developers)**
+
 </div>
+
+## Live app and demo
+
+- **Live app:** [opeblow.github.io/witness](https://opeblow.github.io/witness/). Capture and Verify run on the Portaldot V3 testnet; sealing goes through the hosted notary, so no wallet or tokens are needed.
+- **Demo video (2:54):** [youtu.be/EzAxYOQmFIk](https://youtu.be/EzAxYOQmFIk)
+
+[![Witness demo video](https://img.youtube.com/vi/EzAxYOQmFIk/hqdefault.jpg)](https://youtu.be/EzAxYOQmFIk)
 
 Witness seals a photo the moment it is taken: who took it, when, and every pixel. The record lives on Portaldot, so neither side of a dispute controls it. Edit one region and verification says exactly where.
 
@@ -21,6 +30,7 @@ Built for **Portaldot Hacker House 2026**, Ecosystem DApps track.
 
 ## Table of contents
 
+- [Live app and demo](#live-app-and-demo)
 - [The problem](#the-problem)
 - [How it works](#how-it-works)
 - [Hackathon criteria and how Witness meets them](#hackathon-criteria-and-how-witness-meets-them)
@@ -73,13 +83,13 @@ Any Solidity contract can then gate money on witnessed evidence. See [`ClaimGate
 
 ### Submission requirements
 
-| Requirement                               | How Witness meets it                                                                                                                                                                 | Status  |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| Use Portaldot Network V3.0 core features  | `transactionStorage`, `revive`, `utility.batchAll`, `identity` and finality, detailed in the [sponsor table](#sponsor-how-portaldot-v3-is-used).                                     | Done    |
-| Deploy on the Portaldot testnet           | `WitnessRegistry` is live at [`0x47d33e33e4c7932535001d4a01e4933bc4bcf0e0`](deployments/portaldot-v3-testnet.json) (block 296036), and the first capture was sealed in block 281874. | Done    |
-| Code produced during the Hacker House     | Built between Oct 14 and Nov 6, 2026, with history spread across the event on GitHub.                                                                                                | Done    |
-| Open source repository                    | This repository, Apache 2.0.                                                                                                                                                         | Done    |
-| Demo video (3 minutes max) and pitch deck | Linked here once published.                                                                                                                                                          | Pending |
+| Requirement                              | How Witness meets it                                                                                                                                                                 | Status |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| Use Portaldot Network V3.0 core features | `transactionStorage`, `revive`, `utility.batchAll`, `identity` and finality, detailed in the [sponsor table](#sponsor-how-portaldot-v3-is-used).                                     | Done   |
+| Deploy on the Portaldot testnet          | `WitnessRegistry` is live at [`0x47d33e33e4c7932535001d4a01e4933bc4bcf0e0`](deployments/portaldot-v3-testnet.json) (block 296036), and the first capture was sealed in block 281874. | Done   |
+| Code produced during the Hacker House    | Built between Oct 14 and Nov 6, 2026, with history spread across the event on GitHub.                                                                                                | Done   |
+| Open source repository                   | This repository, Apache 2.0.                                                                                                                                                         | Done   |
+| Demo video (3 minutes max)               | [Watch on YouTube](https://youtu.be/EzAxYOQmFIk) (2:54). The app is live at [opeblow.github.io/witness](https://opeblow.github.io/witness/).                                         | Done   |
 
 ## Sponsor: how Portaldot V3 is used
 
