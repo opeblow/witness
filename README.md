@@ -73,13 +73,13 @@ Any Solidity contract can then gate money on witnessed evidence. See [`ClaimGate
 
 ### Submission requirements
 
-| Requirement                               | How Witness meets it                                                                                                                             | Status  |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
-| Use Portaldot Network V3.0 core features  | `transactionStorage`, `revive`, `utility.batchAll`, `identity` and finality, detailed in the [sponsor table](#sponsor-how-portaldot-v3-is-used). | Done    |
-| Deploy on the Portaldot testnet           | `npm run deploy:registry` deploys `WitnessRegistry`, and the address is written to [`deployments/`](deployments).                                | Pending |
-| Code produced during the Hacker House     | Built between Oct 14 and Nov 6, 2026, with history spread across the event on GitHub.                                                            | Done    |
-| Open source repository                    | This repository, Apache 2.0.                                                                                                                     | Done    |
-| Demo video (3 minutes max) and pitch deck | Linked here once published.                                                                                                                      | Pending |
+| Requirement                               | How Witness meets it                                                                                                                                                                 | Status  |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| Use Portaldot Network V3.0 core features  | `transactionStorage`, `revive`, `utility.batchAll`, `identity` and finality, detailed in the [sponsor table](#sponsor-how-portaldot-v3-is-used).                                     | Done    |
+| Deploy on the Portaldot testnet           | `WitnessRegistry` is live at [`0x47d33e33e4c7932535001d4a01e4933bc4bcf0e0`](deployments/portaldot-v3-testnet.json) (block 296036), and the first capture was sealed in block 281874. | Done    |
+| Code produced during the Hacker House     | Built between Oct 14 and Nov 6, 2026, with history spread across the event on GitHub.                                                                                                | Done    |
+| Open source repository                    | This repository, Apache 2.0.                                                                                                                                                         | Done    |
+| Demo video (3 minutes max) and pitch deck | Linked here once published.                                                                                                                                                          | Pending |
 
 ## Sponsor: how Portaldot V3 is used
 
