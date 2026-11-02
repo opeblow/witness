@@ -1,251 +1,613 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>Witness launch film</title>
-<style>
-  @font-face { font-family: 'Instrument Serif'; src: url('../../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2'); }
-  @font-face { font-family: 'Instrument Serif'; font-style: italic; src: url('../../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2'); }
-  @font-face { font-family: 'IBM Plex Sans'; src: url('../../../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2'); }
-  @font-face { font-family: 'IBM Plex Sans'; font-weight: 600; src: url('../../../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2'); }
-  @font-face { font-family: 'IBM Plex Mono'; src: url('../../../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2'); }
-  :root { --ink: #15130f; --paper: #f4f1ea; --paper2: #ebe6da; --rec: #d2451e; --ok: #1d6b4a; --bad: #a8231a; --rule: #d8d1c3; }
-  html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: var(--ink); }
-  .layer { position: absolute; inset: 0; opacity: 0; overflow: hidden; will-change: opacity, transform; }
-  .ink { background: var(--ink); color: var(--paper); }
-  .paper { background: var(--paper); color: var(--ink); }
-  .shot { position: absolute; left: 0; top: 0; transform-origin: 0 0; }
-  .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
-  .mono { font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; font-size: 20px; }
-  .sans { font-family: 'IBM Plex Sans', sans-serif; }
-  .label { position: absolute; left: 120px; top: 110px; color: #8a8273; }
-  .label b { color: var(--rec); font-weight: 400; margin-right: 18px; }
-  .line { position: absolute; left: 120px; font-size: 118px; line-height: 1.02; white-space: nowrap; }
-  .chip { position: absolute; right: 48px; top: 40px; padding: 10px 16px; background: rgba(21,19,15,0.86); color: var(--paper); border-radius: 3px; font-size: 16px; }
-  .chip i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #3fa676; margin-right: 10px; vertical-align: 1px; }
-  .caption { position: absolute; left: 48px; bottom: 44px; padding: 12px 18px; background: rgba(21,19,15,0.86); color: var(--paper); border-radius: 3px; font-size: 17px; }
-  .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  .frame { position: absolute; box-shadow: 0 40px 120px rgba(0,0,0,0.45); }
-  .diagram rect, .diagram line { vector-effect: non-scaling-stroke; }
-</style>
-</head>
-<body>
-<!-- 1. Hook: illustrative doorstep photo -->
-<div class="layer ink" id="hook">
-  <img class="shot" id="hookA" src="../assets/parcel-sealed.png" />
-  <img class="shot" id="hookB" src="../assets/parcel-edited.png" />
-  <div class="caption mono" style="background:rgba(0,0,0,0.5)">Illustrative scene</div>
-  <div class="center"><div class="serif" id="hookLine" style="font-size:132px;color:var(--paper);text-shadow:0 6px 40px rgba(0,0,0,0.6);margin-top:640px;font-style:italic">Your word against theirs.</div></div>
-</div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Witness launch film</title>
+    <style>
+      @font-face {
+        font-family: 'Instrument Serif';
+        src: url('../../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2');
+      }
+      @font-face {
+        font-family: 'Instrument Serif';
+        font-style: italic;
+        src: url('../../../node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-italic.woff2');
+      }
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        src: url('../../../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2');
+      }
+      @font-face {
+        font-family: 'IBM Plex Sans';
+        font-weight: 600;
+        src: url('../../../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2');
+      }
+      @font-face {
+        font-family: 'IBM Plex Mono';
+        src: url('../../../node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2');
+      }
+      :root {
+        --ink: #15130f;
+        --paper: #f4f1ea;
+        --paper2: #ebe6da;
+        --rec: #d2451e;
+        --ok: #1d6b4a;
+        --bad: #a8231a;
+        --rule: #d8d1c3;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ink);
+      }
+      .layer {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        overflow: hidden;
+        will-change: opacity, transform;
+      }
+      .ink {
+        background: var(--ink);
+        color: var(--paper);
+      }
+      .paper {
+        background: var(--paper);
+        color: var(--ink);
+      }
+      .shot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-origin: 0 0;
+      }
+      .serif {
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      .mono {
+        font-family: 'IBM Plex Mono', monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 20px;
+      }
+      .sans {
+        font-family: 'IBM Plex Sans', sans-serif;
+      }
+      .label {
+        position: absolute;
+        left: 120px;
+        top: 110px;
+        color: #8a8273;
+      }
+      .label b {
+        color: var(--rec);
+        font-weight: 400;
+        margin-right: 18px;
+      }
+      .line {
+        position: absolute;
+        left: 120px;
+        font-size: 118px;
+        line-height: 1.02;
+        white-space: nowrap;
+      }
+      .chip {
+        position: absolute;
+        right: 48px;
+        top: 40px;
+        padding: 10px 16px;
+        background: rgba(21, 19, 15, 0.86);
+        color: var(--paper);
+        border-radius: 3px;
+        font-size: 16px;
+      }
+      .chip i {
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #3fa676;
+        margin-right: 10px;
+        vertical-align: 1px;
+      }
+      .caption {
+        position: absolute;
+        left: 48px;
+        bottom: 44px;
+        padding: 12px 18px;
+        background: rgba(21, 19, 15, 0.86);
+        color: var(--paper);
+        border-radius: 3px;
+        font-size: 17px;
+      }
+      .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .frame {
+        position: absolute;
+        box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+      }
+      .diagram rect,
+      .diagram line {
+        vector-effect: non-scaling-stroke;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Hook: illustrative doorstep photo -->
+    <div class="layer ink" id="hook">
+      <img class="shot" id="hookA" src="../assets/parcel-sealed.png" />
+      <img class="shot" id="hookB" src="../assets/parcel-edited.png" />
+      <div class="caption mono" style="background: rgba(0, 0, 0, 0.5)">Illustrative scene</div>
+      <div class="center">
+        <div
+          class="serif"
+          id="hookLine"
+          style="
+            font-size: 132px;
+            color: var(--paper);
+            text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+            margin-top: 640px;
+            font-style: italic;
+          "
+        >
+          Your word against theirs.
+        </div>
+      </div>
+    </div>
 
-<!-- 2. Problem: typographic -->
-<div class="layer paper" id="problem1">
-  <div class="label mono"><b>01</b>The problem</div>
-  <div class="line serif" id="p1a" style="top:330px">Editing a photo takes seconds.</div>
-  <div class="line serif" id="p1b" style="top:470px;color:#8a8273">Proving it wasn't edited</div>
-  <div class="line serif" id="p1c" style="top:590px;color:#8a8273">can take <i>weeks.</i></div>
-</div>
-<div class="layer paper" id="problem2">
-  <div class="label mono"><b>01</b>The problem</div>
-  <div class="serif" id="stat" style="position:absolute;left:112px;top:180px;font-size:520px;line-height:1;color:var(--bad)">99%</div>
-  <div class="serif" style="position:absolute;left:120px;top:740px;font-size:76px">of insurers have seen manipulated photos.</div>
-  <div class="mono" style="position:absolute;left:122px;top:880px;color:#8a8273;font-size:18px">Source: Verisk, March 2026</div>
-</div>
-<div class="layer paper" id="problem3">
-  <div class="label mono"><b>01</b>The problem</div>
-  <div class="line serif" id="p3a" style="top:360px">Detection makes a guess.</div>
-  <div style="position:absolute;left:120px;top:432px;height:6px;background:var(--bad)" id="strike"></div>
-  <div class="line serif" id="p3b" style="top:520px;color:#8a8273">A guess doesn't settle a dispute.</div>
-</div>
+    <!-- 2. Problem: typographic -->
+    <div class="layer paper" id="problem1">
+      <div class="label mono"><b>01</b>The problem</div>
+      <div class="line serif" id="p1a" style="top: 330px">Editing a photo takes seconds.</div>
+      <div class="line serif" id="p1b" style="top: 470px; color: #8a8273">
+        Proving it wasn't edited
+      </div>
+      <div class="line serif" id="p1c" style="top: 590px; color: #8a8273">
+        can take <i>weeks.</i>
+      </div>
+    </div>
+    <div class="layer paper" id="problem2">
+      <div class="label mono"><b>01</b>The problem</div>
+      <div
+        class="serif"
+        id="stat"
+        style="
+          position: absolute;
+          left: 112px;
+          top: 180px;
+          font-size: 520px;
+          line-height: 1;
+          color: var(--bad);
+        "
+      >
+        99%
+      </div>
+      <div class="serif" style="position: absolute; left: 120px; top: 740px; font-size: 76px">
+        of insurers have seen manipulated photos.
+      </div>
+      <div
+        class="mono"
+        style="position: absolute; left: 122px; top: 880px; color: #8a8273; font-size: 18px"
+      >
+        Source: Verisk, March 2026
+      </div>
+    </div>
+    <div class="layer paper" id="problem3">
+      <div class="label mono"><b>01</b>The problem</div>
+      <div class="line serif" id="p3a" style="top: 360px">Detection makes a guess.</div>
+      <div
+        style="position: absolute; left: 120px; top: 432px; height: 6px; background: var(--bad)"
+        id="strike"
+      ></div>
+      <div class="line serif" id="p3b" style="top: 520px; color: #8a8273">
+        A guess doesn't settle a dispute.
+      </div>
+    </div>
 
-<!-- 3. Reveal -->
-<div class="layer ink" id="reveal">
-  <div class="center">
-    <svg id="mark" width="260" height="260" viewBox="0 0 64 64">
-      <rect id="markBg" width="64" height="64" rx="12" fill="#15130f" />
-      <path id="markPath" d="M15 27V15h12M37 15h12v12M49 37v12H37M27 49H15V37" fill="none" stroke="#f4f1ea" stroke-width="4.5" stroke-linecap="square" stroke-dasharray="100" stroke-dashoffset="100" />
-      <circle id="markDot" cx="32" cy="32" r="6.5" fill="#d2451e" />
-    </svg>
-    <div class="serif" id="word" style="font-size:150px;margin-top:20px;color:var(--paper)">Witness</div>
-    <div class="sans" id="tag" style="font-size:40px;margin-top:20px;color:#bdb5a6">It doesn't guess. It keeps a record.</div>
-  </div>
-</div>
-<div class="layer paper" id="hero"><img class="shot" id="heroImg" src="../assets/screens/home-hero.png" />
-  <div class="chip mono"><i></i>Live product · Portaldot V3 testnet</div></div>
+    <!-- 3. Reveal -->
+    <div class="layer ink" id="reveal">
+      <div class="center">
+        <svg id="mark" width="260" height="260" viewBox="0 0 64 64">
+          <rect id="markBg" width="64" height="64" rx="12" fill="#15130f" />
+          <path
+            id="markPath"
+            d="M15 27V15h12M37 15h12v12M49 37v12H37M27 49H15V37"
+            fill="none"
+            stroke="#f4f1ea"
+            stroke-width="4.5"
+            stroke-linecap="square"
+            stroke-dasharray="100"
+            stroke-dashoffset="100"
+          />
+          <circle id="markDot" cx="32" cy="32" r="6.5" fill="#d2451e" />
+        </svg>
+        <div
+          class="serif"
+          id="word"
+          style="font-size: 150px; margin-top: 20px; color: var(--paper)"
+        >
+          Witness
+        </div>
+        <div class="sans" id="tag" style="font-size: 40px; margin-top: 20px; color: #bdb5a6">
+          It doesn't guess. It keeps a record.
+        </div>
+      </div>
+    </div>
+    <div class="layer paper" id="hero">
+      <img class="shot" id="heroImg" src="../assets/screens/home-hero.png" />
+      <div class="chip mono"><i></i>Live product · Portaldot V3 testnet</div>
+    </div>
 
-<!-- 4–5. Capture and seal -->
-<div class="layer paper" id="cap1"><img class="shot" id="cap1Img" src="../assets/screens/capture-start.png" /><div class="chip mono"><i></i>Capture · live on testnet</div></div>
-<div class="layer paper" id="cap2"><img class="shot" id="cap2Img" src="../assets/screens/capture-review.png" /><div class="chip mono"><i></i>Capture · live on testnet</div></div>
-<div class="layer paper" id="seal0"><img class="shot" id="seal0Img" src="../assets/screens/capture-sealing-0.png" /></div>
-<div class="layer paper" id="seal1"><img class="shot" id="seal1Img" src="../assets/screens/capture-sealing-1.png" /></div>
-<div class="layer paper" id="seal2"><img class="shot" id="seal2Img" src="../assets/screens/capture-sealing-2.png" /></div>
-<div class="layer ink" id="diagram">
-  <div class="label mono" style="color:#8a8273"><b>02</b>One capture, one transaction</div>
-  <svg class="diagram" width="1920" height="1080" style="position:absolute;inset:0">
-    <rect id="dOuter" x="300" y="300" width="1320" height="520" rx="6" fill="none" stroke="#f4f1ea" stroke-width="2" stroke-dasharray="3800" stroke-dashoffset="3800" />
-    <text x="340" y="360" fill="#bdb5a6" font-family="IBM Plex Mono" font-size="26" letter-spacing="3">UTILITY.BATCHALL · ONE ATOMIC EXTRINSIC</text>
-    <g id="dA" opacity="0">
-      <rect x="340" y="410" width="1240" height="160" rx="4" fill="#24211b" stroke="#3d3830" />
-      <text x="380" y="478" fill="#f4f1ea" font-family="IBM Plex Mono" font-size="34">transactionStorage.store</text>
-      <text x="380" y="530" fill="#9f978a" font-family="IBM Plex Sans" font-size="28">The signed evidence: manifest, signature, fingerprint</text>
-    </g>
-    <g id="dB" opacity="0">
-      <rect x="340" y="610" width="1240" height="160" rx="4" fill="#24211b" stroke="#3d3830" />
-      <text x="380" y="678" fill="#f4f1ea" font-family="IBM Plex Mono" font-size="34">revive.call → WitnessRegistry.anchor</text>
-      <text x="380" y="730" fill="#9f978a" font-family="IBM Plex Sans" font-size="28">Solidity on PolkaVM: the permanent, first-write-wins anchor</text>
-    </g>
-  </svg>
-  <div class="serif" id="dC" style="position:absolute;left:300px;top:870px;font-size:64px;color:var(--paper)">Both land together, or <i>neither does.</i></div>
-</div>
-<div class="layer paper" id="sealed"><img class="shot" id="sealedImg" src="../assets/screens/capture-sealed.png" />
-  <div class="caption mono" id="sealedCap">Sealed in block 296,166 · 2 Nov 2026</div></div>
+    <!-- 4–5. Capture and seal -->
+    <div class="layer paper" id="cap1">
+      <img class="shot" id="cap1Img" src="../assets/screens/capture-start.png" />
+      <div class="chip mono"><i></i>Capture · live on testnet</div>
+    </div>
+    <div class="layer paper" id="cap2">
+      <img class="shot" id="cap2Img" src="../assets/screens/capture-review.png" />
+      <div class="chip mono"><i></i>Capture · live on testnet</div>
+    </div>
+    <div class="layer paper" id="seal0">
+      <img class="shot" id="seal0Img" src="../assets/screens/capture-sealing-0.png" />
+    </div>
+    <div class="layer paper" id="seal1">
+      <img class="shot" id="seal1Img" src="../assets/screens/capture-sealing-1.png" />
+    </div>
+    <div class="layer paper" id="seal2">
+      <img class="shot" id="seal2Img" src="../assets/screens/capture-sealing-2.png" />
+    </div>
+    <div class="layer ink" id="diagram">
+      <div class="label mono" style="color: #8a8273"><b>02</b>One capture, one transaction</div>
+      <svg class="diagram" width="1920" height="1080" style="position: absolute; inset: 0">
+        <rect
+          id="dOuter"
+          x="300"
+          y="300"
+          width="1320"
+          height="520"
+          rx="6"
+          fill="none"
+          stroke="#f4f1ea"
+          stroke-width="2"
+          stroke-dasharray="3800"
+          stroke-dashoffset="3800"
+        />
+        <text
+          x="340"
+          y="360"
+          fill="#bdb5a6"
+          font-family="IBM Plex Mono"
+          font-size="26"
+          letter-spacing="3"
+        >
+          UTILITY.BATCHALL · ONE ATOMIC EXTRINSIC
+        </text>
+        <g id="dA" opacity="0">
+          <rect x="340" y="410" width="1240" height="160" rx="4" fill="#24211b" stroke="#3d3830" />
+          <text x="380" y="478" fill="#f4f1ea" font-family="IBM Plex Mono" font-size="34">
+            transactionStorage.store
+          </text>
+          <text x="380" y="530" fill="#9f978a" font-family="IBM Plex Sans" font-size="28">
+            The signed evidence: manifest, signature, fingerprint
+          </text>
+        </g>
+        <g id="dB" opacity="0">
+          <rect x="340" y="610" width="1240" height="160" rx="4" fill="#24211b" stroke="#3d3830" />
+          <text x="380" y="678" fill="#f4f1ea" font-family="IBM Plex Mono" font-size="34">
+            revive.call → WitnessRegistry.anchor
+          </text>
+          <text x="380" y="730" fill="#9f978a" font-family="IBM Plex Sans" font-size="28">
+            Solidity on PolkaVM: the permanent, first-write-wins anchor
+          </text>
+        </g>
+      </svg>
+      <div
+        class="serif"
+        id="dC"
+        style="position: absolute; left: 300px; top: 870px; font-size: 64px; color: var(--paper)"
+      >
+        Both land together, or <i>neither does.</i>
+      </div>
+    </div>
+    <div class="layer paper" id="sealed">
+      <img class="shot" id="sealedImg" src="../assets/screens/capture-sealed.png" />
+      <div class="caption mono" id="sealedCap">Sealed in block 296,166 · 2 Nov 2026</div>
+    </div>
 
-<!-- 6–7. Verify -->
-<div class="layer paper" id="v0"><img class="shot" id="v0Img" src="../assets/screens/verify-start.png" /><div class="chip mono"><i></i>Verify · runs in the browser</div></div>
-<div class="layer paper" id="v1"><img class="shot" id="v1Img" src="../assets/screens/verify-original-full.png" /><div class="chip mono"><i></i>Verify · the original</div></div>
-<div class="layer paper" id="v2"><img class="shot" id="v2Img" src="../assets/screens/verify-edited-full.png" /><div class="chip mono" style="background:rgba(120,25,18,0.92)"><i style="background:#ff8a70"></i>Verify · the buyer's copy</div>
-  <div class="caption mono" id="v2Cap">One region changed · 0.8% of the frame</div></div>
+    <!-- 6–7. Verify -->
+    <div class="layer paper" id="v0">
+      <img class="shot" id="v0Img" src="../assets/screens/verify-start.png" />
+      <div class="chip mono"><i></i>Verify · runs in the browser</div>
+    </div>
+    <div class="layer paper" id="v1">
+      <img class="shot" id="v1Img" src="../assets/screens/verify-original-full.png" />
+      <div class="chip mono"><i></i>Verify · the original</div>
+    </div>
+    <div class="layer paper" id="v2">
+      <img class="shot" id="v2Img" src="../assets/screens/verify-edited-full.png" />
+      <div class="chip mono" style="background: rgba(120, 25, 18, 0.92)">
+        <i style="background: #ff8a70"></i>Verify · the buyer's copy
+      </div>
+      <div class="caption mono" id="v2Cap">One region changed · 0.8% of the frame</div>
+    </div>
 
-<!-- 8–9. Ledger, developers -->
-<div class="layer paper" id="ledger"><img class="shot" id="ledgerImg" src="../assets/screens/ledger.png" /><div class="chip mono"><i></i>Ledger · read live from the registry</div></div>
-<div class="layer paper" id="dev"><img class="shot" id="devImg" src="../assets/screens/developers-full.png" /><div class="chip mono"><i></i>Open source · Apache 2.0</div></div>
+    <!-- 8–9. Ledger, developers -->
+    <div class="layer paper" id="ledger">
+      <img class="shot" id="ledgerImg" src="../assets/screens/ledger.png" />
+      <div class="chip mono"><i></i>Ledger · read live from the registry</div>
+    </div>
+    <div class="layer paper" id="dev">
+      <img class="shot" id="devImg" src="../assets/screens/developers-full.png" />
+      <div class="chip mono"><i></i>Open source · Apache 2.0</div>
+    </div>
 
-<!-- 10. Payoff -->
-<div class="layer paper" id="payoff">
-  <div class="label mono"><b>03</b>Where it matters</div>
-  <div class="line serif" id="u1" style="top:250px">Returns.</div>
-  <div class="line serif" id="u2" style="top:380px">Deliveries.</div>
-  <div class="line serif" id="u3" style="top:510px">Rental deposits.</div>
-  <div class="line serif" id="u4" style="top:640px">Insurance claims.</div>
-  <div class="sans" id="u5" style="position:absolute;left:124px;top:840px;font-size:40px;color:#6b6457">Anywhere a photograph has to stand up as evidence.</div>
-</div>
+    <!-- 10. Payoff -->
+    <div class="layer paper" id="payoff">
+      <div class="label mono"><b>03</b>Where it matters</div>
+      <div class="line serif" id="u1" style="top: 250px">Returns.</div>
+      <div class="line serif" id="u2" style="top: 380px">Deliveries.</div>
+      <div class="line serif" id="u3" style="top: 510px">Rental deposits.</div>
+      <div class="line serif" id="u4" style="top: 640px">Insurance claims.</div>
+      <div
+        class="sans"
+        id="u5"
+        style="position: absolute; left: 124px; top: 840px; font-size: 40px; color: #6b6457"
+      >
+        Anywhere a photograph has to stand up as evidence.
+      </div>
+    </div>
 
-<!-- 11. Close -->
-<div class="layer ink" id="close">
-  <div class="center">
-    <svg id="mark2" width="150" height="150" viewBox="0 0 64 64">
-      <rect width="64" height="64" rx="12" fill="#15130f" />
-      <path d="M15 27V15h12M37 15h12v12M49 37v12H37M27 49H15V37" fill="none" stroke="#f4f1ea" stroke-width="4.5" stroke-linecap="square" />
-      <circle id="dot2" cx="32" cy="32" r="6.5" fill="#d2451e" />
-    </svg>
-    <div class="serif" id="closeLine" style="font-size:128px;color:var(--paper);margin-top:36px">Photographs that can <i>testify.</i></div>
-    <div class="mono" id="closeUrl" style="margin-top:56px;color:#bdb5a6;font-size:26px;letter-spacing:0.12em;text-transform:none">opeblow.github.io/witness</div>
-    <div class="mono" id="closeSub" style="margin-top:22px;color:#7d7668;font-size:18px">Open source · Built on Portaldot V3 · Testnet</div>
-  </div>
-</div>
-<div class="layer" id="black" style="background:#000"></div>
+    <!-- 11. Close -->
+    <div class="layer ink" id="close">
+      <div class="center">
+        <svg id="mark2" width="150" height="150" viewBox="0 0 64 64">
+          <rect width="64" height="64" rx="12" fill="#15130f" />
+          <path
+            d="M15 27V15h12M37 15h12v12M49 37v12H37M27 49H15V37"
+            fill="none"
+            stroke="#f4f1ea"
+            stroke-width="4.5"
+            stroke-linecap="square"
+          />
+          <circle id="dot2" cx="32" cy="32" r="6.5" fill="#d2451e" />
+        </svg>
+        <div
+          class="serif"
+          id="closeLine"
+          style="font-size: 128px; color: var(--paper); margin-top: 36px"
+        >
+          Photographs that can <i>testify.</i>
+        </div>
+        <div
+          class="mono"
+          id="closeUrl"
+          style="
+            margin-top: 56px;
+            color: #bdb5a6;
+            font-size: 26px;
+            letter-spacing: 0.12em;
+            text-transform: none;
+          "
+        >
+          opeblow.github.io/witness
+        </div>
+        <div class="mono" id="closeSub" style="margin-top: 22px; color: #7d7668; font-size: 18px">
+          Open source · Built on Portaldot V3 · Testnet
+        </div>
+      </div>
+    </div>
+    <div class="layer" id="black" style="background: #000"></div>
 
-<script>
-const $ = (id) => document.getElementById(id);
-const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const ease = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
-const easeOut = (x) => 1 - Math.pow(1 - clamp(x), 3);
-const prog = (t, a, b) => clamp((t - a) / (b - a));
-// Opacity window with fades.
-const win = (t, a, b, fi = 0.5, fo = 0.5) => (t < a || t > b ? 0 : Math.min(fi ? easeOut((t - a) / fi) : 1, fo ? ease((b - t) / fo) : 1));
-const lerp = (a, b, x) => a + (b - a) * x;
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+      const ease = (x) => {
+        x = clamp(x);
+        return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+      };
+      const easeOut = (x) => 1 - Math.pow(1 - clamp(x), 3);
+      const prog = (t, a, b) => clamp((t - a) / (b - a));
+      // Opacity window with fades.
+      const win = (t, a, b, fi = 0.5, fo = 0.5) =>
+        t < a || t > b ? 0 : Math.min(fi ? easeOut((t - a) / fi) : 1, fo ? ease((b - t) / fo) : 1);
+      const lerp = (a, b, x) => a + (b - a) * x;
 
-// Camera over an image: keyframes [time, centerX, centerY, scale] in image pixels.
-function cam(img, t, keys) {
-  let k0 = keys[0], k1 = keys[keys.length - 1];
-  for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i][0] && t <= keys[i + 1][0]) { k0 = keys[i]; k1 = keys[i + 1]; break; }
-  if (t < keys[0][0]) k1 = k0;
-  const x = k1 === k0 ? 0 : ease((t - k0[0]) / (k1[0] - k0[0]));
-  const cx = lerp(k0[1], k1[1], x), cy = lerp(k0[2], k1[2], x), s = lerp(k0[3], k1[3], x);
-  img.style.transform = `translate(${960 - cx * s}px, ${540 - cy * s}px) scale(${s})`;
-}
-const show = (id, o) => { const el = $(id); el.style.opacity = o; el.style.display = o > 0.001 ? 'block' : 'none'; };
-const rise = (id, t, at, d = 0.9) => { const p = easeOut((t - at) / d); const el = $(id); el.style.opacity = p; el.style.transform = `translateY(${(1 - p) * 34}px)`; };
+      // Camera over an image: keyframes [time, centerX, centerY, scale] in image pixels.
+      function cam(img, t, keys) {
+        let k0 = keys[0],
+          k1 = keys[keys.length - 1];
+        for (let i = 0; i < keys.length - 1; i++)
+          if (t >= keys[i][0] && t <= keys[i + 1][0]) {
+            k0 = keys[i];
+            k1 = keys[i + 1];
+            break;
+          }
+        if (t < keys[0][0]) k1 = k0;
+        const x = k1 === k0 ? 0 : ease((t - k0[0]) / (k1[0] - k0[0]));
+        const cx = lerp(k0[1], k1[1], x),
+          cy = lerp(k0[2], k1[2], x),
+          s = lerp(k0[3], k1[3], x);
+        img.style.transform = `translate(${960 - cx * s}px, ${540 - cy * s}px) scale(${s})`;
+      }
+      const show = (id, o) => {
+        const el = $(id);
+        el.style.opacity = o;
+        el.style.display = o > 0.001 ? 'block' : 'none';
+      };
+      const rise = (id, t, at, d = 0.9) => {
+        const p = easeOut((t - at) / d);
+        const el = $(id);
+        el.style.opacity = p;
+        el.style.transform = `translateY(${(1 - p) * 34}px)`;
+      };
 
-function render(t) {
-  // 1. Hook
-  show('hook', win(t, 0, 14, 1.2, 0.35));
-  cam($('hookA'), t, [[0, 800, 600, 0.9], [14, 800, 640, 1.02]]);
-  cam($('hookB'), t, [[0, 800, 600, 0.9], [14, 800, 640, 1.02]]);
-  $('hookB').style.opacity = ease(prog(t, 7.0, 8.4));
-  rise('hookLine', t, 11.7, 1.0);
+      function render(t) {
+        // 1. Hook
+        show('hook', win(t, 0, 14, 1.2, 0.35));
+        cam($('hookA'), t, [
+          [0, 800, 600, 0.9],
+          [14, 800, 640, 1.02],
+        ]);
+        cam($('hookB'), t, [
+          [0, 800, 600, 0.9],
+          [14, 800, 640, 1.02],
+        ]);
+        $('hookB').style.opacity = ease(prog(t, 7.0, 8.4));
+        rise('hookLine', t, 11.7, 1.0);
 
-  // 2. Problem
-  show('problem1', win(t, 14, 27.9, 0.35, 0.4));
-  rise('p1a', t, 15.5); rise('p1b', t, 18.6); rise('p1c', t, 20.0);
-  show('problem2', win(t, 27.9, 33.6, 0.3, 0.4));
-  const st = $('stat'); st.style.clipPath = `inset(0 ${100 - 100 * easeOut(prog(t, 28.0, 29.2))}% 0 0)`;
-  show('problem3', win(t, 33.6, 39.6, 0.3, 0.25));
-  rise('p3a', t, 33.8, 0.7);
-  $('strike').style.width = `${980 * ease(prog(t, 35.3, 36.1))}px`;
-  rise('p3b', t, 36.2, 0.9);
+        // 2. Problem
+        show('problem1', win(t, 14, 27.9, 0.35, 0.4));
+        rise('p1a', t, 15.5);
+        rise('p1b', t, 18.6);
+        rise('p1c', t, 20.0);
+        show('problem2', win(t, 27.9, 33.6, 0.3, 0.4));
+        const st = $('stat');
+        st.style.clipPath = `inset(0 ${100 - 100 * easeOut(prog(t, 28.0, 29.2))}% 0 0)`;
+        show('problem3', win(t, 33.6, 39.6, 0.3, 0.25));
+        rise('p3a', t, 33.8, 0.7);
+        $('strike').style.width = `${980 * ease(prog(t, 35.3, 36.1))}px`;
+        rise('p3b', t, 36.2, 0.9);
 
-  // 3. Reveal: mask wipe from the problem card into the ink, then the mark draws itself.
-  const rv = win(t, 39.3, 47.3, 0.4, 0.01);
-  show('reveal', rv);
-  $('reveal').style.clipPath = `circle(${easeOut(prog(t, 39.3, 40.2)) * 1200}px at 50% 50%)`;
-  $('markPath').setAttribute('stroke-dashoffset', 100 - 100 * ease(prog(t, 39.9, 41.4)));
-  const dp = easeOut(prog(t, 41.4, 41.9));
-  $('markDot').setAttribute('r', 6.5 * dp);
-  $('word').style.opacity = easeOut(prog(t, 41.9, 42.8));
-  rise('tag', t, 43.0, 0.8);
-  // Iris into the live product.
-  show('hero', win(t, 46.2, 52.6, 0.01, 0.4));
-  $('hero').style.clipPath = `circle(${ease(prog(t, 46.2, 47.4)) * 1150}px at 50% 50%)`;
-  cam($('heroImg'), t, [[46.2, 960, 540, 1.12], [48, 960, 540, 1.0], [52.6, 700, 450, 1.18]]);
+        // 3. Reveal: mask wipe from the problem card into the ink, then the mark draws itself.
+        const rv = win(t, 39.3, 47.3, 0.4, 0.01);
+        show('reveal', rv);
+        $('reveal').style.clipPath = `circle(${easeOut(prog(t, 39.3, 40.2)) * 1200}px at 50% 50%)`;
+        $('markPath').setAttribute('stroke-dashoffset', 100 - 100 * ease(prog(t, 39.9, 41.4)));
+        const dp = easeOut(prog(t, 41.4, 41.9));
+        $('markDot').setAttribute('r', 6.5 * dp);
+        $('word').style.opacity = easeOut(prog(t, 41.9, 42.8));
+        rise('tag', t, 43.0, 0.8);
+        // Iris into the live product.
+        show('hero', win(t, 46.2, 52.6, 0.01, 0.4));
+        $('hero').style.clipPath = `circle(${ease(prog(t, 46.2, 47.4)) * 1150}px at 50% 50%)`;
+        cam($('heroImg'), t, [
+          [46.2, 960, 540, 1.12],
+          [48, 960, 540, 1.0],
+          [52.6, 700, 450, 1.18],
+        ]);
 
-  // 4. Capture
-  show('cap1', win(t, 52.2, 56.2, 0.4, 0.3));
-  cam($('cap1Img'), t, [[52.2, 960, 540, 1.0], [56.2, 960, 600, 1.08]]);
-  show('cap2', win(t, 55.9, 66.8, 0.3, 0.35));
-  cam($('cap2Img'), t, [[55.9, 960, 540, 1.0], [59.5, 960, 540, 1.0], [64, 1250, 680, 1.45], [66.8, 1250, 690, 1.5]]);
+        // 4. Capture
+        show('cap1', win(t, 52.2, 56.2, 0.4, 0.3));
+        cam($('cap1Img'), t, [
+          [52.2, 960, 540, 1.0],
+          [56.2, 960, 600, 1.08],
+        ]);
+        show('cap2', win(t, 55.9, 66.8, 0.3, 0.35));
+        cam($('cap2Img'), t, [
+          [55.9, 960, 540, 1.0],
+          [59.5, 960, 540, 1.0],
+          [64, 1250, 680, 1.45],
+          [66.8, 1250, 690, 1.5],
+        ]);
 
-  // 5. Seal: real sealing steps, then the transaction diagram.
-  const sk = [[66.5, 1290, 560, 1.55], [71.8, 1300, 560, 1.6]];
-  show('seal0', win(t, 66.5, 68.4, 0.25, 0.01)); cam($('seal0Img'), t, sk);
-  show('seal1', win(t, 68.2, 70.0, 0.15, 0.01)); cam($('seal1Img'), t, sk);
-  show('seal2', win(t, 69.8, 71.9, 0.15, 0.35)); cam($('seal2Img'), t, sk);
-  show('diagram', win(t, 71.6, 80.0, 0.4, 0.05));
-  $('dOuter').setAttribute('stroke-dashoffset', 3800 - 3800 * ease(prog(t, 71.8, 73.4)));
-  $('dA').setAttribute('opacity', easeOut(prog(t, 73.0, 73.7)));
-  $('dB').setAttribute('opacity', easeOut(prog(t, 74.6, 75.3)));
-  rise('dC', t, 77.0, 0.8);
+        // 5. Seal: real sealing steps, then the transaction diagram.
+        const sk = [
+          [66.5, 1290, 560, 1.55],
+          [71.8, 1300, 560, 1.6],
+        ];
+        show('seal0', win(t, 66.5, 68.4, 0.25, 0.01));
+        cam($('seal0Img'), t, sk);
+        show('seal1', win(t, 68.2, 70.0, 0.15, 0.01));
+        cam($('seal1Img'), t, sk);
+        show('seal2', win(t, 69.8, 71.9, 0.15, 0.35));
+        cam($('seal2Img'), t, sk);
+        show('diagram', win(t, 71.6, 80.0, 0.4, 0.05));
+        $('dOuter').setAttribute('stroke-dashoffset', 3800 - 3800 * ease(prog(t, 71.8, 73.4)));
+        $('dA').setAttribute('opacity', easeOut(prog(t, 73.0, 73.7)));
+        $('dB').setAttribute('opacity', easeOut(prog(t, 74.6, 75.3)));
+        rise('dC', t, 77.0, 0.8);
 
-  // Sealed certificate: stamp in, then move to the id.
-  show('sealed', win(t, 80.0, 90.2, 0.01, 0.01));
-  const stamp = 1 + 0.035 * (1 - easeOut(prog(t, 80.0, 80.5)));
-  cam($('sealedImg'), t, [[80, 960, 600, 1.0 * stamp], [82.5, 960, 600, 1.0], [86.5, 900, 590, 1.55], [90.2, 880, 590, 1.6]]);
-  $('sealedCap').style.opacity = easeOut(prog(t, 83, 83.8));
+        // Sealed certificate: stamp in, then move to the id.
+        show('sealed', win(t, 80.0, 90.2, 0.01, 0.01));
+        const stamp = 1 + 0.035 * (1 - easeOut(prog(t, 80.0, 80.5)));
+        cam($('sealedImg'), t, [
+          [80, 960, 600, 1.0 * stamp],
+          [82.5, 960, 600, 1.0],
+          [86.5, 900, 590, 1.55],
+          [90.2, 880, 590, 1.6],
+        ]);
+        $('sealedCap').style.opacity = easeOut(prog(t, 83, 83.8));
 
-  // 6. Verify original.
-  show('v0', win(t, 90.0, 93.8, 0.01, 0.3));
-  cam($('v0Img'), t, [[90, 960, 540, 1.0], [93.8, 960, 600, 1.06]]);
-  show('v1', win(t, 93.5, 102.0, 0.3, 0.01));
-  cam($('v1Img'), t, [[93.5, 960, 540, 1.0], [96.5, 960, 560, 1.0], [101, 960, 820, 0.92], [102, 960, 830, 0.92]]);
+        // 6. Verify original.
+        show('v0', win(t, 90.0, 93.8, 0.01, 0.3));
+        cam($('v0Img'), t, [
+          [90, 960, 540, 1.0],
+          [93.8, 960, 600, 1.06],
+        ]);
+        show('v1', win(t, 93.5, 102.0, 0.3, 0.01));
+        cam($('v1Img'), t, [
+          [93.5, 960, 540, 1.0],
+          [96.5, 960, 560, 1.0],
+          [101, 960, 820, 0.92],
+          [102, 960, 830, 0.92],
+        ]);
 
-  // 7. Verify edited: find the changed corner and hold on it.
-  show('v2', win(t, 102.0, 122.4, 0.01, 0.5));
-  cam($('v2Img'), t, [[102, 960, 540, 1.0], [106.5, 960, 560, 1.0], [109.5, 960, 800, 0.95], [111, 960, 800, 0.95], [114.5, 1362, 790, 3.6], [118.5, 1362, 790, 3.9], [121.5, 960, 760, 1.0]]);
-  $('v2Cap').style.opacity = win(t, 113.5, 121, 0.6, 0.5);
+        // 7. Verify edited: find the changed corner and hold on it.
+        show('v2', win(t, 102.0, 122.4, 0.01, 0.5));
+        cam($('v2Img'), t, [
+          [102, 960, 540, 1.0],
+          [106.5, 960, 560, 1.0],
+          [109.5, 960, 800, 0.95],
+          [111, 960, 800, 0.95],
+          [114.5, 1362, 790, 3.6],
+          [118.5, 1362, 790, 3.9],
+          [121.5, 960, 760, 1.0],
+        ]);
+        $('v2Cap').style.opacity = win(t, 113.5, 121, 0.6, 0.5);
 
-  // 8. Ledger
-  show('ledger', win(t, 122.0, 135.3, 0.5, 0.01));
-  cam($('ledgerImg'), t, [[122, 960, 540, 1.08], [126, 960, 540, 1.0], [131, 960, 520, 1.55], [135.3, 940, 530, 1.6]]);
+        // 8. Ledger
+        show('ledger', win(t, 122.0, 135.3, 0.5, 0.01));
+        cam($('ledgerImg'), t, [
+          [122, 960, 540, 1.08],
+          [126, 960, 540, 1.0],
+          [131, 960, 520, 1.55],
+          [135.3, 940, 530, 1.6],
+        ]);
 
-  // 9. Developers
-  show('dev', win(t, 135.2, 147.7, 0.01, 0.4));
-  cam($('devImg'), t, [[135.2, 960, 540, 1.0], [137.5, 960, 540, 1.0], [141.5, 1080, 560, 1.35], [143.5, 1080, 560, 1.35], [147.7, 1080, 900, 1.25]]);
+        // 9. Developers
+        show('dev', win(t, 135.2, 147.7, 0.01, 0.4));
+        cam($('devImg'), t, [
+          [135.2, 960, 540, 1.0],
+          [137.5, 960, 540, 1.0],
+          [141.5, 1080, 560, 1.35],
+          [143.5, 1080, 560, 1.35],
+          [147.7, 1080, 900, 1.25],
+        ]);
 
-  // 10. Payoff
-  show('payoff', win(t, 147.5, 160.2, 0.5, 0.6));
-  rise('u1', t, 148.6, 0.7); rise('u2', t, 149.7, 0.7); rise('u3', t, 150.9, 0.7); rise('u4', t, 152.4, 0.7); rise('u5', t, 154.4, 1.0);
+        // 10. Payoff
+        show('payoff', win(t, 147.5, 160.2, 0.5, 0.6));
+        rise('u1', t, 148.6, 0.7);
+        rise('u2', t, 149.7, 0.7);
+        rise('u3', t, 150.9, 0.7);
+        rise('u4', t, 152.4, 0.7);
+        rise('u5', t, 154.4, 1.0);
 
-  // 11. Close
-  show('close', win(t, 160.4, 174, 0.8, 0.01));
-  $('dot2').setAttribute('r', 6.5 * (0.85 + 0.15 * Math.sin(Math.max(0, t - 160) * 1.6)));
-  rise('closeLine', t, 163.3, 1.2);
-  rise('closeUrl', t, 166.0, 1.0);
-  rise('closeSub', t, 166.6, 1.0);
-  show('black', clamp((t - 172.6) / 1.4));
-}
-window.render = render;
-window.ready = Promise.all([document.fonts.ready, ...[...document.images].map((i) => i.decode().catch(() => null))]);
-render(0);
-</script>
-</body>
+        // 11. Close
+        show('close', win(t, 160.4, 174, 0.8, 0.01));
+        $('dot2').setAttribute('r', 6.5 * (0.85 + 0.15 * Math.sin(Math.max(0, t - 160) * 1.6)));
+        rise('closeLine', t, 163.3, 1.2);
+        rise('closeUrl', t, 166.0, 1.0);
+        rise('closeSub', t, 166.6, 1.0);
+        show('black', clamp((t - 172.6) / 1.4));
+      }
+      window.render = render;
+      window.ready = Promise.all([
+        document.fonts.ready,
+        ...[...document.images].map((i) => i.decode().catch(() => null)),
+      ]);
+      render(0);
+    </script>
+  </body>
 </html>

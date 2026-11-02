@@ -4,15 +4,15 @@
 
 Spec: 2:54 (174 s), 1920×1080, 30 fps, H.264 High, AAC stereo 48 kHz, loudness normalised to −16 LUFS.
 
-| File | What it is |
-| --- | --- |
-| [`BRIEF.md`](BRIEF.md) | Creative brief, shot list, screen coverage, asset inventory and licences |
-| [`SCRIPT.md`](SCRIPT.md) | Narration with start times |
-| [`timeline.json`](timeline.json) | Master timeline: scenes, voice cues, sound effects |
-| [`narration.json`](narration.json) | Narration text per cue (the TTS input) |
-| `witness-launch-film.srt` | Subtitles matching the final cut |
-| [`src/`](src) | Production source (below) |
-| [`MASTER_BRIEF.md`](MASTER_BRIEF.md) | The original brief |
+| File                                 | What it is                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------ |
+| [`BRIEF.md`](BRIEF.md)               | Creative brief, shot list, screen coverage, asset inventory and licences |
+| [`SCRIPT.md`](SCRIPT.md)             | Narration with start times                                               |
+| [`timeline.json`](timeline.json)     | Master timeline: scenes, voice cues, sound effects                       |
+| [`narration.json`](narration.json)   | Narration text per cue (the TTS input)                                   |
+| `witness-launch-film.srt`            | Subtitles matching the final cut                                         |
+| [`src/`](src)                        | Production source (below)                                                |
+| [`MASTER_BRIEF.md`](MASTER_BRIEF.md) | The original brief                                                       |
 
 ## Reproduce
 

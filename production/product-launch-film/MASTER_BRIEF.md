@@ -33,6 +33,7 @@ The user's full brief (pasted Nov 1 2026) is summarised here in their own sectio
 **Brand.** Use the app's palette: charcoal #15130F, paper #F5F1E8 and #EAE4D6, green #1D6B4A and #7FB89A. Typefaces are Instrument Serif, IBM Plex Sans and IBM Plex Mono (already in apps/web).
 
 **Voice: DECIDED Nov 1, user chose Kokoro-82M (AI voice, option B).** Previously the biggest quality risk. The only installed voices are Microsoft David, Zira and Mark, which sound robotic. Options, best first:
+
 1. The user records the narration themselves. It's authentic and suits a hackathon. Claude supplies the script plus a timed guide track.
 2. Kokoro-82M (Apache 2.0, local, high quality) or Piper (MIT; check each voice's licence).
 3. Do not use unofficial endpoints such as edge-tts. Their licensing is unclear.

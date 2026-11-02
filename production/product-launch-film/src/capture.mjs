@@ -13,7 +13,10 @@ mkdirSync(OUT, { recursive: true });
 const log = {};
 
 const browser = await chromium.launch();
-const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+const ctx = await browser.newContext({
+  viewport: { width: 1920, height: 1080 },
+  deviceScaleFactor: 1,
+});
 const page = await ctx.newPage();
 page.on('pageerror', (e) => console.error('pageerror', e.message));
 const shot = async (name, opts = {}) => {
@@ -33,42 +36,61 @@ await shot('home-full', { fullPage: true, wait: 500 });
 
 // Capture: import the delivery photo, review, seal for real.
 if (!SKIP_SEAL) {
-await page.goto(`${BASE}/capture`, { waitUntil: 'networkidle' });
-await shot('capture-start', { wait: 2500 });
-await page.locator('input[type=file]').first().setInputFiles(resolve(ROOT, 'assets/parcel-sealed.png'));
-await page.getByText('Ready to seal').waitFor();
-await page.getByPlaceholder('Order 4471, unboxing').fill('Order 4471, delivered to door');
-await page.locator('label.check input[type=checkbox]').check();
-await shot('capture-review', { wait: 800 });
-await page.getByRole('button', { name: 'Seal on Portaldot' }).click();
-const t0 = Date.now();
-let n = 0;
-let last = '';
-while (Date.now() - t0 < 240_000) {
-  if (await page.getByText('Witness certificate').count()) break;
-  const steps = await page.locator('.split').innerText().catch(() => '');
-  if (steps !== last && n < 8) {
-    last = steps;
-    await shot(`capture-sealing-${n++}`, { wait: 150 });
+  await page.goto(`${BASE}/capture`, { waitUntil: 'networkidle' });
+  await shot('capture-start', { wait: 2500 });
+  await page
+    .locator('input[type=file]')
+    .first()
+    .setInputFiles(resolve(ROOT, 'assets/parcel-sealed.png'));
+  await page.getByText('Ready to seal').waitFor();
+  await page.getByPlaceholder('Order 4471, unboxing').fill('Order 4471, delivered to door');
+  await page.locator('label.check input[type=checkbox]').check();
+  await shot('capture-review', { wait: 800 });
+  await page.getByRole('button', { name: 'Seal on Portaldot' }).click();
+  const t0 = Date.now();
+  let n = 0;
+  let last = '';
+  while (Date.now() - t0 < 240_000) {
+    if (await page.getByText('Witness certificate').count()) break;
+    const steps = await page
+      .locator('.split')
+      .innerText()
+      .catch(() => '');
+    if (steps !== last && n < 8) {
+      last = steps;
+      await shot(`capture-sealing-${n++}`, { wait: 150 });
+    }
+    await page.waitForTimeout(400);
   }
-  await page.waitForTimeout(400);
-}
-log.sealSeconds = (Date.now() - t0) / 1000;
-await page.getByText('Witness certificate').waitFor({ timeout: 5000 });
-await shot('capture-sealed', { wait: 1500 });
-await shot('capture-sealed-full', { fullPage: true, wait: 200 });
-const [dl] = await Promise.all([page.waitForEvent('download'), page.getByText('Download certificate').click()]);
-await dl.saveAs(resolve(ROOT, 'assets/parcel-sealed.witness.json'));
-log.certificate = await page.locator('main').innerText();
-recordHref = await page.locator('a[href*="/v/"]').first().getAttribute('href').catch(() => null);
+  log.sealSeconds = (Date.now() - t0) / 1000;
+  await page.getByText('Witness certificate').waitFor({ timeout: 5000 });
+  await shot('capture-sealed', { wait: 1500 });
+  await shot('capture-sealed-full', { fullPage: true, wait: 200 });
+  const [dl] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByText('Download certificate').click(),
+  ]);
+  await dl.saveAs(resolve(ROOT, 'assets/parcel-sealed.witness.json'));
+  log.certificate = await page.locator('main').innerText();
+  recordHref = await page
+    .locator('a[href*="/v/"]')
+    .first()
+    .getAttribute('href')
+    .catch(() => null);
 }
 log.recordHref = recordHref;
 
 // Verify: the untouched original, then the edited copy.
-for (const [name, file] of [['verify-original', 'parcel-sealed.png'], ['verify-edited', 'parcel-edited.png']]) {
+for (const [name, file] of [
+  ['verify-original', 'parcel-sealed.png'],
+  ['verify-edited', 'parcel-edited.png'],
+]) {
   await page.goto(`${BASE}/verify`, { waitUntil: 'networkidle' });
   if (name === 'verify-original') await shot('verify-start', { wait: 1500 });
-  await page.locator('input[type=file]').first().setInputFiles(resolve(ROOT, 'assets', file));
+  await page
+    .locator('input[type=file]')
+    .first()
+    .setInputFiles(resolve(ROOT, 'assets', file));
   await page.locator('.verdict').waitFor({ timeout: 120_000 });
   await shot(name, { wait: 2500 });
   await shot(`${name}-full`, { fullPage: true, wait: 200 });

@@ -4,18 +4,90 @@
   "height": 1080,
   "duration": 174,
   "scenes": [
-    { "id": "hook", "start": 0, "end": 14, "visual": "Illustrative doorstep photo; dissolve to the edited copy", "transition_out": "hard cut to paper" },
-    { "id": "problem", "start": 14, "end": 39.5, "visual": "Typographic cards; sourced statistic", "transition_out": "mask wipe into logo" },
-    { "id": "reveal", "start": 39.5, "end": 52, "visual": "Witness mark draws its viewfinder; landing page hero", "transition_out": "push into Capture" },
-    { "id": "capture", "start": 52, "end": 66.5, "visual": "Capture page: import, review", "transition_out": "match cut on the photo" },
-    { "id": "seal", "start": 66.5, "end": 80, "visual": "Sealing steps + one-transaction diagram", "transition_out": "stamp cut" },
-    { "id": "sealed", "start": 80, "end": 90, "visual": "Certificate, zoom to Witness id and block", "transition_out": "hard cut" },
-    { "id": "verify-original", "start": 90, "end": 102, "visual": "Verify: authentic", "transition_out": "hard cut" },
-    { "id": "verify-edited", "start": 102, "end": 122, "visual": "Verify: altered, push into the changed region, held silence", "transition_out": "dissolve" },
-    { "id": "ledger", "start": 122, "end": 135, "visual": "Ledger of live captures", "transition_out": "hard cut" },
-    { "id": "developers", "start": 135, "end": 147.5, "visual": "Developers page: network + registry, quickstart", "transition_out": "typographic" },
-    { "id": "payoff", "start": 147.5, "end": 160, "visual": "Use cases set in type", "transition_out": "fade to ink" },
-    { "id": "close", "start": 160, "end": 174, "visual": "Mark, line, URL", "transition_out": "fade out" }
+    {
+      "id": "hook",
+      "start": 0,
+      "end": 14,
+      "visual": "Illustrative doorstep photo; dissolve to the edited copy",
+      "transition_out": "hard cut to paper"
+    },
+    {
+      "id": "problem",
+      "start": 14,
+      "end": 39.5,
+      "visual": "Typographic cards; sourced statistic",
+      "transition_out": "mask wipe into logo"
+    },
+    {
+      "id": "reveal",
+      "start": 39.5,
+      "end": 52,
+      "visual": "Witness mark draws its viewfinder; landing page hero",
+      "transition_out": "push into Capture"
+    },
+    {
+      "id": "capture",
+      "start": 52,
+      "end": 66.5,
+      "visual": "Capture page: import, review",
+      "transition_out": "match cut on the photo"
+    },
+    {
+      "id": "seal",
+      "start": 66.5,
+      "end": 80,
+      "visual": "Sealing steps + one-transaction diagram",
+      "transition_out": "stamp cut"
+    },
+    {
+      "id": "sealed",
+      "start": 80,
+      "end": 90,
+      "visual": "Certificate, zoom to Witness id and block",
+      "transition_out": "hard cut"
+    },
+    {
+      "id": "verify-original",
+      "start": 90,
+      "end": 102,
+      "visual": "Verify: authentic",
+      "transition_out": "hard cut"
+    },
+    {
+      "id": "verify-edited",
+      "start": 102,
+      "end": 122,
+      "visual": "Verify: altered, push into the changed region, held silence",
+      "transition_out": "dissolve"
+    },
+    {
+      "id": "ledger",
+      "start": 122,
+      "end": 135,
+      "visual": "Ledger of live captures",
+      "transition_out": "hard cut"
+    },
+    {
+      "id": "developers",
+      "start": 135,
+      "end": 147.5,
+      "visual": "Developers page: network + registry, quickstart",
+      "transition_out": "typographic"
+    },
+    {
+      "id": "payoff",
+      "start": 147.5,
+      "end": 160,
+      "visual": "Use cases set in type",
+      "transition_out": "fade to ink"
+    },
+    {
+      "id": "close",
+      "start": 160,
+      "end": 174,
+      "visual": "Mark, line, URL",
+      "transition_out": "fade out"
+    }
   ],
   "voice": [
     { "id": "c01", "at": 1.2 },

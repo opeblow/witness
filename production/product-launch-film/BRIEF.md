@@ -21,34 +21,34 @@
 
 ## Shot list and screen coverage
 
-| Time | Shot | Source | Status |
-| --- | --- | --- | --- |
-| 0:00 | Doorstep photo, dissolve to edited copy | `assets/parcel-*.png` (illustration) | Done |
-| 0:14 | "Editing takes seconds" type card | film.html | Done |
-| 0:28 | 99 % statistic | film.html (Verisk, Mar 2026) | Done |
-| 0:33 | "Detection makes a guess" strike-through | film.html | Done |
-| 0:39 | Mark draws itself, "It keeps a record." | film.html, logo from `apps/web` | Done |
-| 0:46 | Landing page hero (iris in) | `screens/home-hero.png` | Done |
-| 0:52 | Capture: start, import, review | `capture-start`, `capture-review` | Done |
-| 1:06 | Sealing steps, live | `capture-sealing-0..2` | Done |
-| 1:11 | One atomic extrinsic diagram | film.html (matches `packages/sdk/src/substrate.ts`) | Done |
-| 1:20 | Certificate, push to Witness id | `capture-sealed` | Done |
-| 1:30 | Verify: authentic original | `verify-start`, `verify-original-full` | Done |
-| 1:42 | Verify: altered, push into CHANGED | `verify-edited-full` | Done |
-| 2:02 | Ledger with both live captures | `ledger` | Done |
-| 2:15 | Developers: network, registry, quickstart | `developers-full` | Done |
-| 2:27 | Use cases in type | film.html | Done |
-| 2:40 | Close: mark, line, URL | film.html | Done |
+| Time | Shot                                      | Source                                              | Status |
+| ---- | ----------------------------------------- | --------------------------------------------------- | ------ |
+| 0:00 | Doorstep photo, dissolve to edited copy   | `assets/parcel-*.png` (illustration)                | Done   |
+| 0:14 | "Editing takes seconds" type card         | film.html                                           | Done   |
+| 0:28 | 99 % statistic                            | film.html (Verisk, Mar 2026)                        | Done   |
+| 0:33 | "Detection makes a guess" strike-through  | film.html                                           | Done   |
+| 0:39 | Mark draws itself, "It keeps a record."   | film.html, logo from `apps/web`                     | Done   |
+| 0:46 | Landing page hero (iris in)               | `screens/home-hero.png`                             | Done   |
+| 0:52 | Capture: start, import, review            | `capture-start`, `capture-review`                   | Done   |
+| 1:06 | Sealing steps, live                       | `capture-sealing-0..2`                              | Done   |
+| 1:11 | One atomic extrinsic diagram              | film.html (matches `packages/sdk/src/substrate.ts`) | Done   |
+| 1:20 | Certificate, push to Witness id           | `capture-sealed`                                    | Done   |
+| 1:30 | Verify: authentic original                | `verify-start`, `verify-original-full`              | Done   |
+| 1:42 | Verify: altered, push into CHANGED        | `verify-edited-full`                                | Done   |
+| 2:02 | Ledger with both live captures            | `ledger`                                            | Done   |
+| 2:15 | Developers: network, registry, quickstart | `developers-full`                                   | Done   |
+| 2:27 | Use cases in type                         | film.html                                           | Done   |
+| 2:40 | Close: mark, line, URL                    | film.html                                           | Done   |
 
 Screens covered: Landing, Capture (start, review, sealing, certificate), Verify (authentic, altered), Ledger, Developers. Not shown: the public record page (`/v/:id`), which repeats the certificate content.
 
 ## Asset inventory
 
-| Asset | Origin | Licence |
-| --- | --- | --- |
-| Product screenshots | Witness web app, captured by `src/capture.mjs` | Project's own (Apache 2.0) |
-| Parcel photo and edited copy | Rendered SVG by `src/make-photos.mjs` | Original, project's own |
-| Logo mark | `apps/web/src/components/Logo.tsx` | Project's own |
-| Instrument Serif, IBM Plex Sans/Mono | `@fontsource` packages | SIL Open Font License 1.1 |
-| Narration | Kokoro-82M ONNX, voice `af_heart`, generated locally | Model: Apache 2.0 |
-| Score and sound effects | Synthesised by `src/audio.py` | Original, project's own |
+| Asset                                | Origin                                               | Licence                    |
+| ------------------------------------ | ---------------------------------------------------- | -------------------------- |
+| Product screenshots                  | Witness web app, captured by `src/capture.mjs`       | Project's own (Apache 2.0) |
+| Parcel photo and edited copy         | Rendered SVG by `src/make-photos.mjs`                | Original, project's own    |
+| Logo mark                            | `apps/web/src/components/Logo.tsx`                   | Project's own              |
+| Instrument Serif, IBM Plex Sans/Mono | `@fontsource` packages                               | SIL Open Font License 1.1  |
+| Narration                            | Kokoro-82M ONNX, voice `af_heart`, generated locally | Model: Apache 2.0          |
+| Score and sound effects              | Synthesised by `src/audio.py`                        | Original, project's own    |

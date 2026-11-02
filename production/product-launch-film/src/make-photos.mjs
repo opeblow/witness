@@ -68,21 +68,28 @@ const svg = (damaged) => `
     <g transform="translate(0,60)">${barcode}</g>
   </g>
   <polygon points="420,520 820,440 1110,520 710,610" fill="url(#light)"/>
-  ${damaged ? `
+  ${
+    damaged
+      ? `
   <g>
     <polygon points="1110,520 1036,536 1016,572 1048,604 1032,650 1070,664 1110,640" fill="#4a3018" opacity="0.92"/>
     <polygon points="1036,536 1062,562 1048,604 1080,596 1110,580 1110,520" fill="#2c1c0e" opacity="0.7"/>
     <path d="M1036 536 L1060 566 L1044 602 L1078 618 L1060 650" stroke="#1a0f06" stroke-width="5" fill="none"/>
     <path d="M1010 700 q30 -14 60 6 t40 -4" stroke="#1a0f06" stroke-width="3" fill="none" opacity="0.6"/>
     <ellipse cx="1070" cy="610" rx="60" ry="80" fill="#3a2410" opacity="0.35" filter="url(#blur3)"/>
-  </g>` : ''}
+  </g>`
+      : ''
+  }
   <rect width="1600" height="1200" fill="url(#vig)"/>
   <rect width="1600" height="1200" filter="url(#grain)"/>
 </svg>`;
 
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1600, height: 1200 } });
-for (const [name, damaged] of [['parcel-sealed', false], ['parcel-edited', true]]) {
+for (const [name, damaged] of [
+  ['parcel-sealed', false],
+  ['parcel-edited', true],
+]) {
   await page.setContent(`<body style="margin:0">${svg(damaged)}</body>`);
   await page.screenshot({ path: `${OUT}/${name}.png` });
   console.log(`wrote assets/${name}.png`);
