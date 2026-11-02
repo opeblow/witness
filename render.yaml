@@ -1,0 +1,18 @@
+# Render Blueprint for the Witness notary (free web service, Docker).
+# Deploy: https://dashboard.render.com/blueprint/new?repo=https://github.com/opeblow/witness
+services:
+  - type: web
+    name: witness-notary
+    runtime: docker
+    plan: free
+    dockerfilePath: ./services/notary/Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NOTARY_PORT
+        value: '10000'
+      - key: ALLOWED_ORIGINS
+        value: https://opeblow.github.io
+      - key: NOTARY_SEED
+        sync: false # secret: paste from .secrets/notary.env when Render asks
