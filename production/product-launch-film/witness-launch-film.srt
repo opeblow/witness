@@ -1,0 +1,59 @@
+1
+00:00:01,200 --> 00:00:04,869
+A parcel on a doorstep. One photograph, taken at the door.
+
+2
+00:00:05,900 --> 00:00:11,170
+A week later, the buyer sends a different picture. A torn corner. A refund request.
+
+3
+00:00:11,600 --> 00:00:13,699
+And now, it's your word against theirs.
+
+4
+00:00:15,600 --> 00:00:27,842
+Editing a photo takes seconds. Proving that one wasn't edited can take weeks. Insurers, couriers, and landlords keep running into the same question: is this the picture that was actually taken?
+
+5
+00:00:33,800 --> 00:00:38,831
+Most tools try to guess whether an image is fake. But a guess doesn't settle a dispute.
+
+6
+00:00:43,000 --> 00:00:45,346
+Witness doesn't guess. It keeps a record.
+
+7
+00:00:53,000 --> 00:01:05,578
+When a photo is taken, Witness fingerprints it and signs it, right on the device. It also reads the latest finalized block from Portaldot, so a capture can never pretend to be older than it is.
+
+8
+00:01:07,200 --> 00:01:19,202
+Then a single transaction does the rest. The signed evidence goes into Portaldot's transaction storage, and a Solidity contract records the anchor. Both land together, or neither does.
+
+9
+00:01:20,800 --> 00:01:27,883
+About ten seconds later, there's a certificate. A Witness ID, a block number, and a code that anyone can scan.
+
+10
+00:01:30,800 --> 00:01:40,086
+Now, back to the dispute. Drop the original into Verify. Witness checks it against the chain, inside your browser. Identical, bit for bit.
+
+11
+00:01:42,800 --> 00:01:54,665
+Now the buyer's copy. Witness finds the sealed original on its own, compares them region by region, and points to the exact corner that changed. Less than one percent of the frame.
+
+12
+00:02:03,000 --> 00:02:13,235
+Every capture is public. The ledger reads straight from the registry on Portaldot. Nobody controls the record. Not the courier, not the buyer, not even us.
+
+13
+00:02:16,000 --> 00:02:25,880
+And it's open. The SDK lets any Portaldot app seal and verify photos, and any contract can release a payment only when the evidence holds up.
+
+14
+00:02:28,600 --> 00:02:36,216
+Returns. Deliveries. Rental deposits. Insurance claims. Anywhere a photograph has to stand up as evidence.
+
+15
+00:02:43,400 --> 00:02:45,741
+Witness. Photographs that can testify.

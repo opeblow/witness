@@ -1,0 +1,17 @@
+[
+  { "id": "c01", "scene": "hook", "text": "A parcel on a doorstep. One photograph, taken at the door." },
+  { "id": "c02", "scene": "hook", "text": "A week later, the buyer sends a different picture. A torn corner. A refund request." },
+  { "id": "c03", "scene": "hook", "text": "And now, it's your word against theirs." },
+  { "id": "c04", "scene": "problem", "text": "Editing a photo takes seconds. Proving that one wasn't edited can take weeks. Insurers, couriers, and landlords keep running into the same question: is this the picture that was actually taken?" },
+  { "id": "c05", "scene": "problem", "text": "Most tools try to guess whether an image is fake. But a guess doesn't settle a dispute." },
+  { "id": "c06", "scene": "reveal", "text": "Witness doesn't guess. It keeps a record." },
+  { "id": "c07", "scene": "capture", "text": "When a photo is taken, Witness fingerprints it and signs it, right on the device. It also reads the latest finalized block from Portaldot, so a capture can never pretend to be older than it is." },
+  { "id": "c08", "scene": "seal", "text": "Then a single transaction does the rest. The signed evidence goes into Portaldot's transaction storage, and a Solidity contract records the anchor. Both land together, or neither does." },
+  { "id": "c09", "scene": "sealed", "text": "About ten seconds later, there's a certificate. A Witness I D, a block number, and a code that anyone can scan." },
+  { "id": "c10", "scene": "verify-original", "text": "Now, back to the dispute. Drop the original into Verify. Witness checks it against the chain, inside your browser. Identical, bit for bit." },
+  { "id": "c11", "scene": "verify-edited", "text": "Now the buyer's copy. Witness finds the sealed original on its own, compares them region by region, and points to the exact corner that changed. Less than one percent of the frame." },
+  { "id": "c12", "scene": "ledger", "text": "Every capture is public. The ledger reads straight from the registry on Portaldot. Nobody controls the record. Not the courier, not the buyer, not even us." },
+  { "id": "c13", "scene": "developers", "text": "And it's open. The S D K lets any Portaldot app seal and verify photos, and any contract can release a payment only when the evidence holds up." },
+  { "id": "c14", "scene": "payoff", "text": "Returns. Deliveries. Rental deposits. Insurance claims. Anywhere a photograph has to stand up as evidence." },
+  { "id": "c15", "scene": "close", "text": "Witness. Photographs that can testify." }
+]

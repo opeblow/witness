@@ -1,0 +1,13 @@
+{
+  "name": "witness-launch-film",
+  "private": true,
+  "type": "module",
+  "description": "Production source for the Witness launch film (not part of the app runtime).",
+  "scripts": {
+    "photos": "node src/make-photos.mjs",
+    "capture": "node src/capture.mjs",
+    "voice": "../../../tts/.venv/Scripts/python.exe src/voice.py",
+    "render": "node src/render.mjs"
+  },
+  "dependencies": { "playwright": "1.64.1" }
+}
