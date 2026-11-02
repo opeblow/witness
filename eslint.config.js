@@ -9,6 +9,7 @@ export default tseslint.config(
       '**/dist/**',
       '**/node_modules/**',
       'contracts/artifacts/**',
+      'production/**/src/**',
       'contracts/cache/**',
       'contracts/typechain-types/**',
       'coverage/**',

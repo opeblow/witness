@@ -35,7 +35,7 @@ const net = network();
 if (!net.registry) throw new Error('Deploy the registry first: npm run deploy:registry');
 const api = await connectPortaldot(net.substrateRpc);
 const sponsor = new Keyring({ type: 'sr25519', ss58Format: 42 }).addFromUri(sponsorSeed());
-const registry = new RegistryClient(net);
+const registry = new RegistryClient(net, undefined, async () => api);
 const balanceOf = async () =>
   (
     (await api.query['system']?.['account']?.(sponsor.address)) as unknown as {

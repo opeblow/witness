@@ -25,7 +25,7 @@ export async function getRegistry(): Promise<RegistryClient | null> {
   if (!NETWORK.registry) return null;
   if (!registry) {
     const { RegistryClient } = await import('@witness/sdk');
-    registry = new RegistryClient(NETWORK);
+    registry = new RegistryClient(NETWORK, undefined, getApi);
   }
   return registry;
 }

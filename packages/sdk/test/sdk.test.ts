@@ -128,3 +128,57 @@ describe('buildCaptureExtrinsic', () => {
     expect(calls['batchAll']).toEqual([[{ name: 'store' }, { name: 'call' }]]);
   });
 });
+
+describe('RegistryClient native event fallback', () => {
+  it('finds Anchored events in native blocks when the Ethereum RPC returns no logs', async () => {
+    const { encodeAbiParameters, encodeEventTopics } = await import('viem');
+    const { WITNESS_REGISTRY_ABI } = await import('../src/index.js');
+    const registry = '0x47d33e33e4c7932535001d4a01e4933bc4bcf0e0' as Hex;
+    const contentHash = `0x${'ab'.repeat(32)}` as Hex;
+    const manifestDigest = `0x${'cd'.repeat(32)}` as Hex;
+    const signer = `0x${'ef'.repeat(32)}` as Hex;
+    const topics = encodeEventTopics({
+      abi: WITNESS_REGISTRY_ABI,
+      eventName: 'Anchored',
+      args: { contentHash, signer, submitter: registry },
+    });
+    const data = encodeAbiParameters(
+      [{ type: 'bytes32' }, { type: 'uint64' }, { type: 'uint32' }],
+      [manifestDigest, 42n, 296166],
+    );
+    const record = {
+      event: {
+        section: 'revive',
+        method: 'ContractEmitted',
+        data: { toJSON: () => [registry, data, topics] },
+      },
+    };
+    const api = {
+      rpc: {
+        chain: {
+          getHeader: async () => ({ number: { toNumber: () => 296200 } }),
+          getBlockHash: async (n: number) => `0x${n.toString(16)}`,
+        },
+        state: {
+          queryStorage: async () => [['0x1', [{ isNone: false, unwrap: () => new Uint8Array() }]]],
+        },
+      },
+      query: { system: { events: { key: () => '0xevents' } } },
+      createType: () => [record],
+    } as unknown as ApiPromise;
+    const client = {
+      getBlockNumber: async () => 296200n,
+      getLogs: async () => [],
+    } as never;
+    const network = {
+      ...PORTALDOT_V3_TESTNET,
+      registry,
+      registryDeploymentBlock: 296036,
+    };
+    const anchors = await new RegistryClient(network, client, async () => api).recent();
+    expect(anchors).toHaveLength(1);
+    expect(anchors[0]?.contentHash).toBe(contentHash);
+    expect(anchors[0]?.manifestDigest).toBe(manifestDigest);
+    expect(anchors[0]?.blockNumber).toBe(296166);
+  });
+});

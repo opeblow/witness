@@ -38,8 +38,8 @@ check(
   `${((code.result?.length ?? 2) - 2) / 2} bytes`,
 );
 
-const registry = new RegistryClient(net);
 const api = await connectPortaldot(net.substrateRpc);
+const registry = new RegistryClient(net, undefined, async () => api);
 const count = await registry.anchorCount();
 check('Registry reports its anchor count', count >= 0, `${count} anchors`);
 

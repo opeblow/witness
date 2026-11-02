@@ -8,7 +8,14 @@ import {
   getAbiItem,
   http,
 } from 'viem';
+import type { ApiPromise } from '@polkadot/api';
 import type { NetworkConfig } from './network.js';
+
+/** Returns a connected Portaldot API, used to read registry events from native blocks. */
+export type NativeApi = () => Promise<ApiPromise>;
+
+/** Blocks per `state_queryStorage` request when scanning native events. */
+const NATIVE_SCAN_CHUNK = 1000;
 
 export const WITNESS_REGISTRY_ABI = [
   {
@@ -107,10 +114,17 @@ export class RegistryClient {
   readonly address: Hex;
   private readonly client: PublicClient;
   private readonly fromBlock: bigint;
+  private readonly native: NativeApi | undefined;
 
-  constructor(network: NetworkConfig, client?: PublicClient) {
+  /**
+   * `native` is optional but recommended: Portaldot's Ethereum RPC only indexes logs of
+   * Ethereum-style transactions, so `Anchored` events emitted by native `revive.call`
+   * extrinsics (how Witness anchors) are only visible through the native chain.
+   */
+  constructor(network: NetworkConfig, client?: PublicClient, native?: NativeApi) {
     if (!network.registry) throw new RegistryNotDeployedError();
     this.address = network.registry;
+    this.native = native;
     this.fromBlock = BigInt(network.registryDeploymentBlock);
     this.client =
       client ??
@@ -163,8 +177,10 @@ export class RegistryClient {
       toBlock: BigInt(stored.blockNumber),
     });
     const log = logs[0];
-    if (!log) return stored;
-    return { ...stored, ...this.fromLog(log) };
+    if (log) return { ...stored, ...this.fromLog(log) };
+    const native = await this.nativeAnchors(stored.blockNumber, stored.blockNumber).catch(() => []);
+    const match = native.find((a) => a.contentHash === stored.contentHash);
+    return match ? { ...stored, ...match } : stored;
   }
 
   /** Recent anchors, newest first. */
@@ -180,10 +196,64 @@ export class RegistryClient {
       fromBlock,
       toBlock: 'latest',
     });
-    return logs
-      .map((log) => this.fromLog(log))
-      .sort((a, b) => b.blockNumber - a.blockNumber)
-      .slice(0, limit);
+    let anchors = logs.map((log) => this.fromLog(log));
+    if (anchors.length === 0 && this.native) {
+      anchors = await this.nativeAnchors(Number(fromBlock), Number(head));
+    }
+    return anchors.sort((a, b) => b.blockNumber - a.blockNumber).slice(0, limit);
+  }
+
+  /** `Anchored` events of this registry found in native blocks `from..to` (inclusive). */
+  async nativeAnchors(from: number, to: number): Promise<Anchor[]> {
+    if (!this.native) return [];
+    const api = await this.native();
+    const head = (await api.rpc.chain.getHeader()).number.toNumber();
+    const last = Math.min(to, head);
+    const key = api.query['system']?.['events']?.key();
+    if (!key || from > last) return [];
+    const ranges: [number, number][] = [];
+    for (let start = from; start <= last; start += NATIVE_SCAN_CHUNK) {
+      ranges.push([start, Math.min(start + NATIVE_SCAN_CHUNK - 1, last)]);
+    }
+    const found: Anchor[] = [];
+    const scan = async ([a, b]: [number, number]) => {
+      const [fromHash, toHash] = await Promise.all([
+        api.rpc.chain.getBlockHash(a),
+        api.rpc.chain.getBlockHash(b),
+      ]);
+      // @polkadot/api returns one [blockHash, values] pair per block whose events changed,
+      // with values aligned to the requested keys (here only System.Events).
+      const sets = (await api.rpc.state.queryStorage([key], fromHash, toHash)) as unknown as [
+        unknown,
+        { isNone: boolean; unwrap(): Uint8Array }[],
+      ][];
+      for (const [, values] of sets) {
+        for (const data of values) {
+          if (!data || data.isNone) continue;
+          const records = api.createType('Vec<FrameSystemEventRecord>', data.unwrap());
+          for (const { event } of records as unknown as Iterable<{
+            event: { section: string; method: string; data: { toJSON(): unknown } };
+          }>) {
+            if (event.section !== 'revive' || event.method !== 'ContractEmitted') continue;
+            const [contract, payload, topics] = event.data.toJSON() as [string, Hex, Hex[]];
+            if (contract.toLowerCase() !== this.address.toLowerCase()) continue;
+            try {
+              found.push(
+                this.fromLog({
+                  data: payload,
+                  topics: topics as [Hex, ...Hex[]],
+                  transactionHash: null,
+                }),
+              );
+            } catch {
+              // Not an Anchored event.
+            }
+          }
+        }
+      }
+    };
+    for (let i = 0; i < ranges.length; i += 4) await Promise.all(ranges.slice(i, i + 4).map(scan));
+    return found;
   }
 
   private fromLog(log: {

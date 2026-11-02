@@ -8,7 +8,7 @@
 [![CodeQL](https://github.com/opeblow/witness/actions/workflows/codeql.yml/badge.svg)](https://github.com/opeblow/witness/actions/workflows/codeql.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-15130F)](LICENSE)
 [![Network: Portaldot V3 testnet](https://img.shields.io/badge/network-Portaldot%20V3%20testnet-1D6B4A)](https://node-console.portaldot.dev)
-[![Tests](https://img.shields.io/badge/tests-67%20TS%20%2B%2013%20Solidity-1D6B4A)](#testing)
+[![Tests](https://img.shields.io/badge/tests-69%20TS%20%2B%2013%20Solidity-1D6B4A)](#testing)
 [![Node](https://img.shields.io/badge/node-%3E%3D22-15130F)](.nvmrc)
 
 </div>
@@ -66,7 +66,7 @@ Any Solidity contract can then gate money on witnessed evidence. See [`ClaimGate
 
 | Criterion                           | Weight | How Witness meets it                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----------------------------------- | -----: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Technical implementation**        |    30% | A typed monorepo (core, SDK, notary, contracts, web app) with 67 TypeScript and 13 Solidity tests, lint, typecheck and CodeQL in CI. Each capture is one atomic extrinsic, so evidence and anchor can never be half-written. Design choices are recorded in five [ADRs](docs/adr), and attacks are covered in the [threat model](docs/threat-model.md).                                                                                  |
+| **Technical implementation**        |    30% | A typed monorepo (core, SDK, notary, contracts, web app) with 69 TypeScript and 13 Solidity tests, lint, typecheck and CodeQL in CI. Each capture is one atomic extrinsic, so evidence and anchor can never be half-written. Design choices are recorded in five [ADRs](docs/adr), and attacks are covered in the [threat model](docs/threat-model.md).                                                                                  |
 | **Innovation (use of V3 features)** |    30% | Uses both of Portaldot's runtimes in a single call: the native `transactionStorage` pallet holds the signed evidence, and a Solidity contract on `revive` holds the permanent anchor. Capture time comes from finalized blocks rather than the device clock. Instead of guessing whether a photo is fake, Witness proves which photo was taken and shows exactly which region changed. See [Sponsor](#sponsor-how-portaldot-v3-is-used). |
 | **Ecosystem contribution**          |    20% | `@witness/sdk` lets any Portaldot app seal and verify photos, and `ClaimGate.sol` shows any contract releasing funds only on witnessed evidence. The notary pays fees, so users need no wallet or tokens. Open source under Apache 2.0, with a public [API](docs/api.md) and [manifest spec](docs/manifest-spec.md).                                                                                                                     |
 | **Business value**                  |    20% | Targets condition evidence: returns, deliveries, rental deposits and insurance claims, where 99% of insurers have seen manipulated photos (Verisk, March 2026). Businesses pay per sealed capture through the notary ([ADR 0005](docs/adr/0005-sponsored-notary.md)). Go-to-market starts where one party controls capture, such as a courier app or a rental check-out ([ADR 0001](docs/adr/0001-provenance-over-detection.md)).        |
@@ -207,7 +207,7 @@ witness/
 
 ```bash
 npm install
-npm test                  # 67 TypeScript tests
+npm test                  # 69 TypeScript tests
 npm run test:contracts    # 13 Solidity tests
 npm run dev               # web app on http://localhost:5173
 ```

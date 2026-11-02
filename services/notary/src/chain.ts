@@ -40,7 +40,9 @@ export class PortaldotChain implements ChainPort {
     await cryptoWaitReady();
     const api = await connectPortaldot(network.substrateRpc);
     const sponsor = new Keyring({ type: 'sr25519', ss58Format: 42 }).addFromUri(seed);
-    const registry = network.registry ? new RegistryClient(network) : null;
+    const registry = network.registry
+      ? new RegistryClient(network, undefined, async () => api)
+      : null;
     return new PortaldotChain(api, sponsor, registry, network);
   }
 

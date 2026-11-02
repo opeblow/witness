@@ -36,7 +36,7 @@ export function headlineFor(verdict: Verdict): Headline {
         pill: 'Altered',
         tone: 'bad',
         title: 'This picture was edited.',
-        body: `${regions} region${regions === 1 ? '' : 's'} differ from the sealed original, covering ${percent(verdict.comparison.changedRatio)} of the frame.`,
+        body: `${regions === 1 ? 'One region differs' : `${regions} regions differ`} from the sealed original, covering ${percent(verdict.comparison.changedRatio)} of the frame.`,
       };
     }
     case 'reframed':
