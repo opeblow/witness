@@ -4,7 +4,7 @@ import './app.css';
 const blocks = {
   install: `git clone ${REPOSITORY_URL}
 cd witness && npm install
-npm test                 # 67 TypeScript tests
+npm test                 # 69 TypeScript tests
 npm run test:contracts   # 13 Solidity tests
 npm run verify:live      # read-only audit of the live deployment`,
   verify: `import { RegistryClient, connectPortaldot, verifyImage, PORTALDOT_V3_TESTNET, withDeployment } from '@witness/sdk';
